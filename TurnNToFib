@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class TurnNToFib {
+
+    public static int turnToFibonacci(long n) {
+        /**
+         * 用cur 记录当前斐波那契数
+         * prev 记录前一个斐波那契数
+         */
+        long cur = 1;
+        long prev = 0;
+        while(cur < n) {
+            long sum = cur + prev;
+            prev = cur;
+            cur = sum;
+        }
+        int step1 = (int)(cur - n);
+        int step2 = (int)(n - prev);
+        if (step1 > step2) {
+            return step2;
+        }
+        return step1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        long n = scanner.nextLong();
+        System.out.println(turnToFibonacci(20));
+    }
+
+}
