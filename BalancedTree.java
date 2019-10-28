@@ -1,9 +1,10 @@
 
 
- //ÅĞ¶ÏÊ÷ÊÇ·ñÎªÎªÆ½ºâÊ÷£¨×óÓÒ×ÓÊ÷¸ß¶È²îµÄ¾ø¶ÔÖµĞ¡ÓÚµÈÓÚ1£©
+ //åˆ¤æ–­æ ‘æ˜¯å¦ä¸ºä¸ºå¹³è¡¡æ ‘ï¼ˆå·¦å³å­æ ‘é«˜åº¦å·®çš„ç»å¯¹å€¼å°äºç­‰äº1ï¼‰
 class BalancedTree{
 
     public int height(Node root) {
+     //åˆ¤æ–­é«˜åº¦
         if(root == null) {
             return 0;
         }
@@ -14,11 +15,11 @@ class BalancedTree{
     }
 
     public boolean isBalanced(Node root) {
-//Èç¹ûÒ»¸ö¿ÕÊ÷ÊÇÆ½ºâÊ÷
+     //å¦‚æœä¸€ä¸ªç©ºæ ‘æ˜¯å¹³è¡¡æ ‘
         if(root == null){
             return true;
         }
-        //×óÓÒ×ÓÊ÷Ò²±ØĞëÂú×ãÆ½ºâÊ÷
+        //å·¦å³å­æ ‘ä¹Ÿå¿…é¡»æ»¡è¶³å¹³è¡¡æ ‘
         boolean leftBalanced = isBalanced(root.left);
         if(!leftBalanced){
             return false;
@@ -27,7 +28,7 @@ class BalancedTree{
         if(!rightBalanced){
             return false;
         }
-        //ÅĞ¶Ï×óÓÒ×ÓÊ÷½áµã¾ø¶ÔÖµÏà²îĞ¡ÓÚµÈÓÚ1
+        //åˆ¤æ–­å·¦å³å­æ ‘ç»“ç‚¹ç»å¯¹å€¼ç›¸å·®å°äºç­‰äº1
         int leftHeight = calcHeight(root.left);
         int rightHeight = calcHeight(root.right);
         int diff = leftHeight - rightHeight;
