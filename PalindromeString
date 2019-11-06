@@ -1,0 +1,37 @@
+import java.util.Scanner;
+import java.lang.StringBuffer;
+
+public class PalindromeString {
+
+    public static int makePalindoromeString(String arg1, String arg2) {
+        //count用来计算 合成回文字符串的可能次数
+        int count = 0;
+        //循环从不同位置将arg1 截开 并将arg2 插入
+        for (int i = 0; i <= arg1.length(); i++) {
+            String s1 = arg1.substring(0,i);
+            String s2 = arg1.substring(i);
+            String results = s1 + arg2 + s2;
+
+            //利用 StringBuffer 的revers 方法将字符串反转
+            StringBuffer sb = new StringBuffer(results);
+
+            StringBuffer reverseSb = sb.reverse();
+
+            //将转好的字符串转换为String类
+            String reverseResults = reverseSb.toString();
+            //String类复写了 equals 方法  StringBuffer类没有
+            if(results.equals(reverseResults)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入两串字符");
+        String arg1 = scanner.nextLine();
+        String arg2 = scanner.nextLine();
+        System.out.println(makePalindoromeString(arg1,arg2));
+    }
+}
