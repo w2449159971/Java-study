@@ -1,0 +1,70 @@
+import java.util.*;
+
+public class LongestNumberString {
+    public static String longestNumberString(String str) {
+        if (str.length() > 255) {
+            System.out.println("字符串长度超过上限！");
+            return null;
+        }
+        //很麻烦
+        Map<String, Integer> resultSet = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c >= '0' && c <= '9') {
+                for (int j = i; j < str.length(); j++) {
+                    char ch = str.charAt(j);
+                    if (!(ch >= '0' && ch <= '9') || j == str.length() - 1) {
+                        resultSet.put(str.substring(i,j + 1), j - i + 1);
+                        i = j;
+                        break;
+                    }
+                }
+            }
+        }
+        int max = 0;
+        int value = 0;
+        String result = "";
+        for (String s : resultSet.keySet()) {
+            value = resultSet.get(s);
+            if (value > max ) {
+                max = value;
+                result = s;
+            }
+        }
+        return result;
+    }
+
+    public static String longestNumberString2(String str) {
+        if (str.length() > 255) {
+            System.out.println("字符串长度超过上限！");
+            return null;
+        }
+        StringBuffer sb = new StringBuffer();
+        for (char c : str.toCharArray()) {
+            if (c >= '0' && c <= '9') {
+                sb.append(c);
+            }
+            else {
+                sb.append(' ');
+            }
+        }
+        String s = sb.toString();
+        String[] numbers = s.split("\\s+");
+        int max = 0;
+        int m = 0;
+        for (int i = 0; i < numbers.length; i++){
+            if (numbers[i].length() > max) {
+                max = numbers[i].length();
+                m = i;
+            }
+        }
+        return numbers[m];
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("输入一串字符串");
+        String str = scanner.nextLine();
+        System.out.println(longestNumberString2(str));
+    }
+}
