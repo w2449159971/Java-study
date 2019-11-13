@@ -1,0 +1,30 @@
+public class Parenthesis {
+    //括号匹配
+    public static boolean chkParenthesis(String A, int n) {
+        // write code here
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < A.length(); i++){
+            char s = A.charAt(i);
+            if (s != '(' && s != ')') {
+                return false;
+            }
+            if (s == '(') {
+                left ++;
+            }
+            if (s == ')') {
+                right ++;
+            }
+        }
+        if ((left + right) % 2 != 0) {
+            return false;
+        }
+        return left + right == n;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(chkParenthesis("(()())", 6));
+        System.out.println(chkParenthesis("()()A()",6));
+        System.out.println(chkParenthesis("()()())",7));
+    }
+}
