@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class LCM {
+    //循环判断
+    public static int lowestCommonMultiple(int a, int b) {
+        int max = a > b ? a : b;
+        int lcm = 0;
+        for (int i = a; i <= a * b; i++) {
+            if (i % a == 0 && i % b == 0) {
+                lcm = i;
+                break;
+            }
+        }
+        return lcm;
+    }
+
+    //辗转相除法！！！写一下！！！
+    public static int lowestCommonMultiple2(int a, int b) {
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入两个正整数");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        System.out.println(lowestCommonMultiple(a, b));
+    }
+}
