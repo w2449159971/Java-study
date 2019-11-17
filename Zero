@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Zero {
+    //规律
+    // 2*5  因子有5 的数字 25 = 5*5 25 * 4 =100
+    //所以只要对数字进行因式分解 计算因子5 的个数
+    public static int zero(int n) {
+        int count = 0;
+        for (int i = 0; i <= n; i = i + 5) {
+            if (i == 0) {
+                continue;
+            }
+            int j = i;
+            while(j % 5 == 0) {
+                j = j / 5;
+                count ++;
+            }
+        }
+        return count;
+    }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.println(zero(n));
+    }
+}
