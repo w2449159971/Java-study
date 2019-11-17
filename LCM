@@ -14,9 +14,18 @@ public class LCM {
         return lcm;
     }
 
-    //辗转相除法！！！写一下！！！
-    public static int lowestCommonMultiple2(int a, int b) {
-        return 0;
+    //辗转相除法！！
+    //最小公倍数就是两个数的乘积 除以最大公约数
+    public static int gcb(int a, int b) {
+        //找到最大公约数
+        int max = a>b ? a : b;
+        int min = a<b ? a : b;
+        while(min != 0) {
+            int cur = max % min;
+            max = min;
+            min = cur;
+        }
+        return max;
     }
 
     public static void main(String[] args) {
