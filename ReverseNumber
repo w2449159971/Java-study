@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class ReverseNumber {
+    public static String reverseNumber(int n) {
+        StringBuilder sb = new StringBuilder();
+        while(n != 0) {
+            int j = n % 10;
+            sb.append(j);
+            n = n / 10;
+        }
+        String result = sb.toString();
+        return result;
+    }
+    
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.println(reverseNumber(n));
+    }
+}
