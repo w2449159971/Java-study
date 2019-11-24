@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class NumberPlus {
+    //实现不用任何算数运算符的两数相加
+    // 1 ： 00000001
+    // 2 :  00000010
+    // 3 :  00000011
+    // 4 :  00000100
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        System.out.println(addAB(a,b));
+    }
+
+    private static int addAB(int a, int b) {
+        if (0 == b) {
+            return a;
+        }
+        int sum = a ^ b;
+        int carry = (a & b) << 1;
+        if (0 == carry) {
+            return sum;
+        }
+        return addAB(sum, carry);
+    }
+}
