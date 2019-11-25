@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class StudentsGrades {
+    //读入n个学生的成绩 输出某一给定分数的学生人数
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> result = new ArrayList<>();
+        boolean flag = true;
+        while (flag) {
+            int n = scanner.nextInt();
+            if (n == 0) {
+                break;
+            }
+            int number = 0;
+            List<Integer> grade = new ArrayList<>();
+            for (int i = 0; i < n; i++){
+                grade.add(scanner.nextInt());
+            }
+            int want = scanner.nextInt();
+            for (Integer g: grade){
+                if (g == want){
+                    number++;
+                }
+            }
+            result.add(number);
+        }
+        System.out.println(" ");
+        for (int i = 0; i < result.size(); i ++){
+            System.out.println(result.indexOf(i));
+        }
+    }
+
+}
