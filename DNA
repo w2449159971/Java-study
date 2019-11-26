@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class DNA {
+    //找到GC比最高的子串 输出
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            String dna = scanner.nextLine();
+            int n = scanner.nextInt();
+            int max = 0;
+            int beginIndex = 0;
+            for (int i = 0; i < dna.length() - n; i++){
+                int count = 0;
+                for (int j = i; j < i + n; j++){
+                    if (dna.charAt(j) == 'C' || dna.charAt(j) == 'G'){
+                        count++;
+                    }
+                }
+                if (count > max){
+                    max = count;
+                    beginIndex = i;
+                }
+            }
+            System.out.println(dna.substring(beginIndex,beginIndex + n));
+        }
+    }
+}
