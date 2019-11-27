@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class BuyApples {
+    public static int buyApples(int want) {
+        if (want > 100) {
+            System.out.println("输入的苹果个数不在小易的期望范围内");
+            return -1;
+        }
+        //因为6 和8 都为偶数 所以能恰好购买 则想买的个数want 也应该为偶数 且至少大于6
+        if (want % 2 == 1 || want < 6) {
+            return -1;
+        }
+        int buy6 = 0;
+        int buy8 = 0;
+        //想要购买袋数少  先买8个装
+        for (int i = want / 8; i >= 0; i--) {
+            //计算买了8个装 后剩下是否能够刚好买6个装
+            if ((want - (i * 8)) % 6 == 0){
+                buy6 = (want - (i * 8)) / 6;
+                buy8 = i;
+            }
+        }
+        return buy6 + buy8;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入想买的苹果数（1 - 100 之间）");
+        int want = scanner.nextInt();
+        System.out.println(buyApples(want));
+    }
+}
