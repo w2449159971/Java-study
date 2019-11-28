@@ -8,10 +8,12 @@ class Node{
         this.next = null;
     }
 }
+
 public class ReverseList {
     public static Node reverse(Node head){
         Node newhead = null;
         Node cur = head;
+        //从头结点开始将向后一个节点的指向逆置过来
         while(cur != null){
             Node next = cur.next;
             cur.next = newhead;
