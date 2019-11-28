@@ -1,0 +1,67 @@
+class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+public class Partition {
+    public static ListNode partition(ListNode pHead, int x) {
+        // write code here
+        ListNode pre = null;
+        ListNode back = null;
+        ListNode preLast = null;
+        ListNode backLast = null;
+        ListNode cur = pHead;
+        while (cur != null) {
+            if (cur.val < x) {
+                if (pre == null) {
+                    pre = cur;
+                    preLast = pre;
+                } else {
+                    preLast.next = cur;
+                    preLast = cur;
+                }
+            } else {
+                if (back == null) {
+                    back = cur;
+                    backLast = back;
+                } else {
+                    backLast.next = cur;
+                    backLast = cur;
+                }
+            }
+            cur = cur.next;
+        }
+        if (pre == null) {
+            return back;
+        }
+        preLast.next = back;
+        if (backLast != null)
+            backLast.next = null;
+        return pre;
+    }
+    
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(2);
+        ListNode l2 = new ListNode(5);
+        ListNode l3 = new ListNode(8);
+        ListNode l4 = new ListNode(6);
+        ListNode l5 = new ListNode(3);
+        ListNode l6 = new ListNode(4);
+
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        l5.next = l6;
+
+        ListNode result = partition(l1,2);
+        while (result != null) {
+            System.out.println(result.val);
+            result = result.next;
+        }
+    }
+
+}
