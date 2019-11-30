@@ -9,6 +9,7 @@ class ListNode {
 public class Partition {
     public static ListNode partition(ListNode pHead, int x) {
         // write code here
+        //用两个链表分别装下 小于x  和大于等于x的
         ListNode pre = null;
         ListNode back = null;
         ListNode preLast = null;
@@ -34,6 +35,8 @@ public class Partition {
             }
             cur = cur.next;
         }
+        
+        //将两个链表连接在一起
         if (pre == null) {
             return back;
         }
