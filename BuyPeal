@@ -1,0 +1,34 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class BuyPeal {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String seller = sc.nextLine();
+        String buyer = sc.nextLine();
+        buyPeal(seller,buyer);
+    }
+
+    private static void buyPeal(String seller, String buyer) {
+        Map<Character,Integer> sell = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < seller.length(); i++) {
+            sell.put(seller.charAt(i),sell.getOrDefault(seller.charAt(i),0) + 1);
+        }
+        for (int j = 0; j < buyer.length(); j++) {
+            if (sell.containsKey(buyer.charAt(j))) {
+                sell.replace(buyer.charAt(j),sell.get(buyer.charAt(j)) - 1);
+                if (sell.get(buyer.charAt(j)) == 0) {
+                    sell.remove(buyer.charAt(j));
+                }
+                count ++;
+            }
+        }
+        if (count == buyer.length()) {
+            System.out.println("Yes " + (seller.length() - count));
+        } else {
+            System.out.println("No " + (buyer.length() - count));
+        }
+    }
+}
