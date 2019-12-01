@@ -29,8 +29,8 @@ class BalancedTree{
             return false;
         }
         //判断左右子树结点绝对值相差小于等于1
-        int leftHeight = calcHeight(root.left);
-        int rightHeight = calcHeight(root.right);
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
         int diff = leftHeight - rightHeight;
         if (diff > 1 || diff < -1) {
             return false;
