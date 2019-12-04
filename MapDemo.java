@@ -9,24 +9,24 @@ public class MapDemo {
         map.put(3, "love");
         map.put(5, "java");
         System.out.println(map);
-        //¸ù¾İkey»ñÈ¡value
+        //æ ¹æ®keyè·å–value
         System.out.println(map.get(2));
-        //map ÖĞ²»´æÔÚµÄkey·µ»Ø null
+        //map ä¸­ä¸å­˜åœ¨çš„keyè¿”å› null
         System.out.println(map.get(101));
-        //mapÖĞ²»´æÔÚµÄkey ·µ»ØÄ¬ÈÏÖµ
+        //mapä¸­ä¸å­˜åœ¨çš„key è¿”å›é»˜è®¤å€¼
         System.out.println(map.getOrDefault(101,"like"));
-        //Ä¬ÈÏÖµ²»»á·ÅÈëmapÖĞ
+        //é»˜è®¤å€¼ä¸ä¼šæ”¾å…¥mapä¸­
         System.out.println(map);
 
-        //´òÓ¡ËùÓĞkey
+        //æ‰“å°æ‰€æœ‰key
         for (Integer key : map.keySet()) {
             System.out.println(key);
         }
-        //´òÓ¡ËùÓĞvalue
+        //æ‰“å°æ‰€æœ‰value
         for (String value : map.values()) {
             System.out.println(value);
         }
-        //°´ key - value Ó³Éä¹ØÏµ´òÓ¡
+        //æŒ‰ key - value æ˜ å°„å…³ç³»æ‰“å°   æ‰“å°çš„é¡ºåºæ˜¯éšæœºçš„ 
         for (Map.Entry<Integer,String> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
