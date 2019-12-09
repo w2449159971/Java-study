@@ -1,0 +1,394 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.Scanner;
+
+class Process{
+    String identifier;      //标识符
+    int inTime;             //进入时间
+    int runTime;            //运行时间
+    int priority;           //优先级
+    int startTime;
+    int endTime;
+    double cyclingTime;       //周转时间
+    double weightedTurnover; //带权周转时间
+    boolean alive;           //进程状态
+    int countTime ;           //进程还需运行的时间
+
+    public Process( int inTime, int runTime, int priority,String identifier){
+        this.identifier = identifier;
+        this.inTime = inTime;
+        this.runTime = runTime;
+        this.priority = priority;
+        this.alive = true;
+        this.countTime = runTime;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public int getCountTime() {
+        return countTime;
+    }
+
+    public void setCountTime(int countTime) {
+        this.countTime = countTime;
+    }
+
+    public void setCyclingTime() {
+        this.cyclingTime = endTime - inTime;
+    }
+
+    public void setWeightedTurnover () {
+        this.weightedTurnover = cyclingTime / runTime;
+    }
+
+    public void setEndTime(int end) {
+        this.endTime = end;
+    }
+
+    public void setStartTime(int start) {
+        this.startTime = start;
+    }
+
+
+}
+
+public class ProcessScheduling {
+    /**
+     * 1.录入界面
+     * 2.算法选择界面
+     * 3.输出界面
+     * 
+     */
+    static int CPU = 1;  //CPU 被占用情况  1：空闲  0：被占用
+
+    static final int MAXLEN = 10;
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        List<Process> processes = new ArrayList<>();
+        processes = input();
+        boolean flag = true;
+        while (flag) {
+            menu();
+            int choice = in.nextInt();
+            switch (choice){
+                case 0: flag = false;
+                break;
+                case 1: List<Process> list1 = processes;  FCFS(list1);   //先来先服务
+                break;
+                case 2: List<Process> list2 = processes;  SJF(list2);    //短进程优先
+                break;
+                case 3:List<Process> list3 = processes;   PSA(list3);    //优先级优先
+                break;
+                case 4:
+                    System.out.println("请设定时间片的大小");
+                    int round = in.nextInt();
+                    List<Process> list4 = processes;
+                    RR(list4,round);    //时间片轮转
+                break;
+            }
+        }
+
+    }
+    
+    //时间片轮转算法
+    private static void RR(List<Process> processes,int round) {
+        System.out.println("------------- RR 算法-------------");
+        int count = processes.size();
+        int time = 0;
+        int[] waitQueue = new int[MAXLEN];
+        int front = 0;
+        int tail = 0;
+        int running = 0;
+        if (count <= 0){
+            System.out.println("无可用进程");
+            return;
+        }
+        while (count > 0) {
+            for (int i = 0; i < processes.size(); i++) {
+                if (processes.get(i).inTime == time){
+                    waitQueue[tail] = i;
+                    tail = (tail+1) % MAXLEN;
+                }
+            }
+            if (processes.get(running).getCountTime() == 0){
+                processes.get(running).setEndTime(time);
+                processes.get(running).setAlive(false);
+                count--;
+                CPU = 1;
+            }
+            if (CPU == 0) {
+                if (time % round == 0) {
+                    waitQueue[tail] = running;
+                    tail = (tail + 1) % MAXLEN;
+                    CPU = 1;
+                } else {
+                    int temp = processes.get(running).getCountTime();
+                    temp--;
+                    processes.get(running).setCountTime(temp);
+                }
+            }
+            if (CPU == 1 && front != tail){
+                running = waitQueue[front];
+                front = (front+1) % MAXLEN;
+                int temp = processes.get(running).getCountTime();
+                if (temp == processes.get(running).runTime){
+                    processes.get(running).setStartTime(time);
+                }
+                temp--;
+                processes.get(running).setCountTime(temp);
+                CPU = 0;
+            }
+            time++;
+        }
+        showResult(processes);
+    }
+    
+    //非抢占式 静态 高优先级优先算法
+    private static void PSA(List<Process> processes) {
+        System.out.println("-------------PSA算法-------------");
+        int count = processes.size();
+        int waitcount = 0;
+        int time = 0; //当前时间
+        int[] waitQueue = new int[MAXLEN];
+        int running  = 0;  //当前运行进程
+        int front = 0;
+        int tail = 0;
+        int length = 0;
+        if (count <= 0){
+            System.out.println("无可用进程");
+            return;
+        }
+        while (count > 0) {
+            for (int i = 0; i < processes.size(); i++) {
+                if (waitcount < processes.size()) {
+                    if (processes.get(i).isAlive() && processes.get(i).inTime == time) {
+                        waitQueue[tail] = i;
+                        tail = (tail + 1) % MAXLEN;
+                        length++;
+                        waitcount++;
+                        InsertSort(processes, waitQueue, length, front, 'p');
+                    }
+                }
+            }
+            if (processes.get(running).isAlive() && processes.get(running).getCountTime() == 0) {
+                processes.get(running).setAlive(false);
+                processes.get(running).setEndTime(time);
+                count--;
+                CPU = 1;
+            }
+            if (CPU == 0) {
+                int temp = processes.get(running).getCountTime();
+                temp--;
+                processes.get(running).setCountTime(temp);
+            }
+            if (CPU == 1 && front != tail) {
+                running = waitQueue[front];
+                front = (front + 1) % MAXLEN;
+                processes.get(running).setStartTime(time);
+                int temp = processes.get(running).getCountTime();
+                temp--;
+                processes.get(running).setCountTime(temp);
+                if (temp != 0) {
+                    CPU = 0;
+                }
+            }
+            time++;
+        }
+        showResult(processes);
+    }
+    
+    //非抢占式短进程优先算法
+    private static void SJF(List<Process> processes) {
+        System.out.println("-------------SJF算法-------------");
+        int count = processes.size();
+        int waitcount = 0;
+        int time = 0; //当前时间
+        int[] waitQueue = new int[MAXLEN];
+        int running = 0;  //当前运行进程
+        int front = 0;
+        int tail = 0;
+        int length = 0;
+        if (count <= 0) {
+            System.out.println("无可用进程");
+            return;
+        }
+        while (count > 0) {
+            for (int i = 0; i < processes.size(); i++) {
+                if (waitcount < processes.size()) {
+                    if (processes.get(i).isAlive() && processes.get(i).inTime == time) {
+                        waitQueue[tail] = i;
+                        tail = (tail + 1) % MAXLEN;
+                        length++;
+                        waitcount++;
+                        InsertSort(processes, waitQueue, length, front, 's');
+                    }
+                }
+            }
+            if (processes.get(running).isAlive() && processes.get(running).getCountTime() == 0) {
+                processes.get(running).setAlive(false);
+                processes.get(running).setEndTime(time);
+                count--;
+                CPU = 1;
+            }
+            if (CPU == 0) {
+                int temp = processes.get(running).getCountTime();
+                temp--;
+                processes.get(running).setCountTime(temp);
+            }
+            if (CPU == 1 && front != tail) {
+                running = waitQueue[front];
+                front = (front + 1) % MAXLEN;
+                processes.get(running).setStartTime(time);
+                int temp = processes.get(running).getCountTime();
+                temp--;
+                processes.get(running).setCountTime(temp);
+                if (temp != 0) {
+                    CPU = 0;
+                }
+            }
+            time++;
+        }
+        showResult(processes);
+    }
+
+    private static void InsertSort(List<Process> processes, int[] waitQueue, int length, int front, char choice) {
+        //choice表示选择用什么排序
+        // s： 服务时间
+        // p： 优先级
+        switch (choice) {
+            case 's': {
+                for (int i = front; i < length; i++) {
+                    for (int j = i + 1; j < length; j++) {
+                        if (processes.get(waitQueue[i]).runTime > processes.get(waitQueue[j]).runTime) {
+                            int temp = waitQueue[i];
+                            waitQueue[i] = waitQueue[j];
+                            waitQueue[j] = temp;
+                        }
+                    }
+                }
+            } break;
+            case 'p': {
+                for (int i = front; i < length; i++) {
+                    for (int j = i + 1; j < length; j++) {
+                        if (processes.get(waitQueue[i]).priority < processes.get(waitQueue[j]).priority) {
+                            int temp = waitQueue[i];
+                            waitQueue[i] = waitQueue[j];
+                            waitQueue[j] = temp;
+                        }
+                    }
+                }
+            } break;
+        }
+    }
+    
+    //非抢占式先来先服务算法
+    private static void FCFS(List<Process> list1) {
+        System.out.println("-------------FCFS算法-------------");
+        int count = list1.size();
+        int waitcount = 0;
+        int time = 0; //当前时间
+        int[] waitQueue = new int[MAXLEN];
+        int running  = 0;  //当前运行进程
+        int front = 0;
+        int tail = 0;
+        if (count <= 0){
+            System.out.println("无可用进程");
+            return;
+        }
+        while (count > 0){
+            for (int i = 0; i < list1.size(); i++) {
+                if (waitcount < list1.size()) {
+                    if (list1.get(i).isAlive() && list1.get(i).inTime == time) {
+                        waitQueue[tail] = i;
+                        tail = (tail + 1) % MAXLEN;
+                        waitcount++;
+                    }
+                }
+            }
+            if (list1.get(running).isAlive() && list1.get(running).getCountTime() == 0){
+                list1.get(running).setAlive(false);
+                list1.get(running).setEndTime(time);
+                count --;
+                CPU = 1;
+            }
+            if (CPU == 0){
+                int temp = list1.get(running).getCountTime();
+                temp--;
+                list1.get(running).setCountTime(temp);
+            }
+            if (CPU == 1 && front != tail){
+                running = waitQueue[front];
+                front = (front + 1) % MAXLEN;
+                list1.get(running).setStartTime(time);
+                int temp = list1.get(running).getCountTime();
+                temp--;
+                list1.get(running).setCountTime(temp);
+                if (temp != 0){
+                    CPU = 0;
+                }
+            }
+            time ++;
+        }
+        showResult(list1);
+    }
+
+    
+    private static void showResult(List<Process> processes) {
+        System.out.println("进程\t进入时间\t服务时间\t开始时间\t结束时间\t周转时间\t带权周转时间");
+        double countCycleTime = 0;
+        double countWeight = 0;
+        for (int i = 0; i < processes.size(); i++) {
+            processes.get(i).setCyclingTime();
+            processes.get(i).setWeightedTurnover();
+            processes.get(i).setAlive(true);
+            processes.get(i).setCountTime(processes.get(i).runTime);
+
+            countCycleTime += processes.get(i).cyclingTime;
+            countWeight += processes.get(i).weightedTurnover;
+            System.out.println(processes.get(i).identifier +"      \t" + processes.get(i).inTime + "      \t" +
+                    processes.get(i).runTime + "     \t" + processes.get(i).startTime + "       \t" + processes.get(i).endTime
+                    + "       \t" + processes.get(i).cyclingTime + "      \t" + processes.get(i).weightedTurnover);
+        }
+        System.out.println("平均周转时间：" + countCycleTime/processes.size() + "\t平均带权周转时间：" + countWeight/processes.size());
+    }
+
+    private static void menu() {
+        System.out.println("请选择想要使用的进程调度算法！");
+        System.out.println("***************************");
+        System.out.println("*    1.先来先服务 FCFS     *");
+        System.out.println("*    2.短进程优先 SJF      *");
+        System.out.println("*    3.高优先级优先 PSA    *");
+        System.out.println("*    4.时间片轮转 RR       *");
+        System.out.println("*    0.退出               *");
+        System.out.println("***************************");
+    }
+
+    private static List<Process> input() {
+        Scanner sc = new Scanner(System.in);
+        List<Process> list = new ArrayList<>();
+        System.out.println("请输入进程个数：");
+        int n = sc.nextInt();
+        Process[] p = new Process[n];
+        System.out.println("请输入每个进程的到达时间,服务时间,优先级和进程ID:");
+        //初始化进程数据
+        for(int i=0;i<n;i++){
+            int inTime = sc.nextInt();
+            int runTime = sc.nextInt();
+            int priority = sc.nextInt();
+            String pid = sc.nextLine();
+            p[i] = new Process(inTime,runTime,priority,pid);
+        }
+        for (int i = 0; i < n; i++) {
+            list.add(p[i]);
+        }
+        return list;
+    }
+}
