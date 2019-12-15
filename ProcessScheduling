@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 class Process{
     String identifier;      //标识符
-    int inTime;             //进入时间
+    int inTime;             //倒达时间
     int runTime;            //运行时间
     int priority;           //优先级
-    int startTime;
-    int endTime;
+    int startTime;          //开始时间
+    int endTime;            //结束时间
     double cyclingTime;       //周转时间
     double weightedTurnover; //带权周转时间
     boolean alive;           //进程状态
