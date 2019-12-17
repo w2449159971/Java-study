@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class BuyApples {
     public static int buyApples(int want) {
+        // 范围限定
         if (want > 100) {
             System.out.println("输入的苹果个数不在小易的期望范围内");
             return -1;
