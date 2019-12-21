@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class DNA {
+
     //找到GC比最高的子串 输出
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -12,6 +13,7 @@ public class DNA {
             for (int i = 0; i < dna.length() - n; i++){
                 int count = 0;
                 //从开始节点 至此往后数子串长度个字符 判断是否为G 或 C
+                //是G或者C那么count++
                 for (int j = i; j < i + n; j++){
                     if (dna.charAt(j) == 'C' || dna.charAt(j) == 'G'){
                         count++;
