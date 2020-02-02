@@ -2,7 +2,6 @@
 
  //判断树是否为为平衡树（左右子树高度差的绝对值小于等于1）
 class BalancedTree{
-
     public int height(Node root) {
      //判断高度
         if(root == null) {
@@ -28,7 +27,8 @@ class BalancedTree{
         if(!rightBalanced){
             return false;
         }
-        //判断左右子树结点绝对值相差小于等于1
+
+       //判断左右子树结点绝对值相差小于等于1
         int leftHeight = height(root.left);
         int rightHeight = height(root.right);
         int diff = leftHeight - rightHeight;
@@ -37,4 +37,5 @@ class BalancedTree{
         }
         return true;
     }
+
 }
