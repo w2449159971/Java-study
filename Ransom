@@ -1,0 +1,28 @@
+class Ransom {
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        if(magazine.length() < ransomNote.length()) {
+            return false;
+        }
+        int count = ransomNote.length();
+        StringBuilder m = new StringBuilder(magazine);
+        for (int i = 0; i < ransomNote.length(); i++) {
+            char c = ransomNote.charAt(i);
+            for (int j = 0; j < m.length(); j++) {
+                if (m.charAt(j) == c) {
+                    m.deleteCharAt(j);
+                    count--;
+                    break;
+                }
+            }
+        }
+        if (count == 0) {
+            return true;
+        }
+        else  return false;
+    }
+    public static void main(String[] args) {
+        String s1 = "bg";
+        String s2 = "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj";
+        System.out.println(canConstruct(s1, s2));
+    }
+}
