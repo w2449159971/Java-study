@@ -1,0 +1,26 @@
+class LengthOfLastWord {
+    public static int lengthOfLastWord(String s) {
+        if(s.length() == 0) return 0;
+        int i = s.length() - 1;
+        while (s.charAt(i) == ' ') {
+            if (i == 0 ) {
+                return 0;
+            }
+            else {
+                i = i - 1;
+            }
+        }
+        int count = 0;
+        for (int start = i; start >= 0; start--) {
+            if (s.charAt(start) != ' '){
+                count++;
+            }
+            else break;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(lengthOfLastWord("b   a    "));
+    }
+}
