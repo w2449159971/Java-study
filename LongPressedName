@@ -1,0 +1,75 @@
+class LongPressedName {
+    public boolean isLongPressedName1(String name, String typed) {
+    //两个指针分别遍历两个字符数组
+    //若指向的两个字符相等 则两个指针都想后移一个
+    //若不相等则typed 的指针向后移 name的指针不动
+    //带遍历结束 若name的指针不等于他的长度 即未遍历到最后一个字符 则输出false
+        if(typed.length() == 0 || typed.length() < name.length()) {
+            return false;
+        }
+        char[] names = name.toCharArray();
+        char[] typeds = typed.toCharArray();
+        int pn = 0;
+        int pt = 0;
+        while (pn < name.length() && pt < typed.length()){
+            if (names[pn] == typeds[pt]){
+                pn++;
+            }
+            pt++;
+        }
+        return pn == name.length();
+    }
+
+    //双指针
+    public boolean isLongPressedName(String name, String typed) {
+        int j = 0;
+        for (char c: name.toCharArray()) {
+            if (j == typed.length()) return false;
+            // If mismatch...
+            if (typed.charAt(j) != c) {
+                // If it's the first char of the block, ans is false.
+                if (j==0 || typed.charAt(j-1) != typed.charAt(j)) return false;
+                // Discard all similar chars
+                char cur = typed.charAt(j);
+                while (j < typed.length() && typed.charAt(j) == cur) j++;
+                // If next isn't a match, ans is false.
+                if (j == typed.length() || typed.charAt(j) != c)
+                    return false;
+            }j++;
+        }return true;
+    }
+
+    //分组
+    public boolean isLongPressedName2(String name, String typed) {
+            //分组 将两个按每个字母分好组 组内记录字母个数
+        //判断两个字符串分好组后是否相等  或组数相同，typed 比 name 组内数字大
+        Group g1 = groupify(name);
+        Group g2 = groupify(typed);
+        if (!g1.key.equals(g2.key))
+            return false;
+        for (int i = 0; i < g1.count.size(); ++i)
+            if (g1.count.get(i) > g2.count.get(i))
+                return false;
+        return true;
+    }
+    public Group groupify(String S) {
+        StringBuilder key = new StringBuilder();
+        List<Integer> count = new ArrayList();
+        int anchor = 0;
+        int N = S.length();
+        for (int i = 0; i < N; ++i) {
+            if (i == N-1 || S.charAt(i) != S.charAt(i+1)) { // end of group
+                key.append(S.charAt(i));
+                count.add(i - anchor + 1);
+                anchor = i+1;
+            }
+        }return new Group(key.toString(), count);
+    }
+}
+class Group {
+    String key;
+    List<Integer> count;
+    Group(String k, List<Integer> c) {
+        key = k;count = c;
+    }
+}
