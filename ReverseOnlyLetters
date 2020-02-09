@@ -1,0 +1,26 @@
+class ReverseOnlyLetters {
+    public static String reverseOnlyLetters(String S) {
+        StringBuilder sb = new StringBuilder();
+        char[] c = S.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if ((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z')){
+                sb.append(c[i]);
+            }
+        }
+        sb.reverse();
+        int j = 0;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < c.length; i++) {
+            if ((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z')){
+                c[i] = sb.charAt(j);
+                j++;
+            }
+            result.append(c[i]);
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverseOnlyLetters("ab-cd"));
+    }
+}
