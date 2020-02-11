@@ -1,0 +1,19 @@
+class PlusOne {
+    public int[] plusOne(int[] digits) {
+        //三种情况
+        // 1.不需要进位 直接再最后一个加1
+        // 2.需要进位 但最高位不需进位
+        // 3.最高位需要进位 如99  999  数组长度需要加1
+        int len = digits.length;
+        for (int i = len - 1; i>= 0; i--) {
+            int cur = digits[i] + 1;
+            digits[i] = cur % 10;
+            if (digits[i] != 0) {
+                return digits;
+            }
+        }
+        digits = new int[len + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}
