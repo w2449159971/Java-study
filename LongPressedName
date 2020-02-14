@@ -1,9 +1,6 @@
 class LongPressedName {
     public boolean isLongPressedName1(String name, String typed) {
-    //两个指针分别遍历两个字符数组
-    //若指向的两个字符相等 则两个指针都想后移一个
-    //若不相等则typed 的指针向后移 name的指针不动
-    //带遍历结束 若name的指针不等于他的长度 即未遍历到最后一个字符 则输出false
+    
         if(typed.length() == 0 || typed.length() < name.length()) {
             return false;
         }
@@ -21,6 +18,10 @@ class LongPressedName {
     }
 
     //双指针
+    //两个指针分别遍历两个字符数组
+    //若指向的两个字符相等 则两个指针都想后移一个
+    //若不相等则typed 的指针向后移 name的指针不动
+    //带遍历结束 若name的指针不等于他的长度 即未遍历到最后一个字符 则输出false
     public boolean isLongPressedName(String name, String typed) {
         int j = 0;
         for (char c: name.toCharArray()) {
