@@ -1,4 +1,7 @@
 class LengthOfLastWord {
+//从后往前遍历字符串计算 从后往前第一个单词的长度
+//从后面第一个不是空格的字符开始 
+//到第一个空格结束 
     public static int lengthOfLastWord(String s) {
         if(s.length() == 0) return 0;
         int i = s.length() - 1;
