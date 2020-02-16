@@ -1,0 +1,34 @@
+/**
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+//利用栈的先进后出的特点
+//首先将链表中所有元素压入栈
+//再将栈中元素依次出栈放入一个线性表中
+import java.util.Stack;
+import java.util.ArrayList;
+public class PrintListFromTailToHead {
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        Stack<Integer> st = new Stack<Integer>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        ListNode cur = listNode;
+        if(cur == null){
+            return result;
+        }
+        while(cur != null){
+            st.push(cur.val);
+            cur = cur.next;
+        }
+        while(!st.empty()){
+            result.add(st.pop());
+        }
+        return result;
+    }
+}
