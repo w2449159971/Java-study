@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+
+public class MinNumberInRotateArray {
+    //因为是一个非递减旋转数组 所以从开始一部分的数字是递增的
+    //遍历数组 找到突然下降的那个数字就是最小数字
+    public int minNumberInRotateArray(int [] array) {
+        if(array.length == 0){
+            return 0;
+        }
+        int min = array[0];
+        int cur = 1;
+        while (cur < array.length){
+            if(array[cur] >= min){
+                min = array[cur];
+                cur++;
+            } else {
+                min = array[cur];
+                break;
+            }
+        }
+        return min;
+    }
+}
