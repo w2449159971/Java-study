@@ -1,7 +1,7 @@
 class BubbleSort{
     public static void bubbleSort(int[] array) {
         for (int i = 0; i < array.length - 1; i ++) {
-            //�������� [0, array.length - i]
+            //范围[0, array.length - i]
             boolean sorted = true;
             for(int j = 0; j < array.length - i - 1; j++){
                 if(array[j] > array[j + 1]) {
@@ -9,6 +9,7 @@ class BubbleSort{
                     sorted = false;
                 }
             }
+            //已经有序 即没有进行交换 可直接跳出
             if (sorted) {
                 break ;
             }
