@@ -1,10 +1,11 @@
 public class InsertSort{
+
 public static void insertSortV1(int[] array) {
         for (int i = 0; i < array.length - 1; i++){
-            //ÓÐÐòÇø¼ä   [0,i]
-            // ÎÞÐòÇø¼ä		[i + 1, array.length)
-            // ´ý²åÈëµÄÊý¾ÝÊÇ array[i + 1]
-            // ²åÈë¹ý³ÌÔÚÓÐÐòÇø¼äÄÚ²éÕÒ
+            //æœ‰åºåŒºé—´   [0,i]
+            // æ— åºåŒºé—´		[i + 1, array.length)
+            // å¾…æ’å…¥çš„æ•°æ®æ˜¯ array[i + 1]
+            // æ’å…¥è¿‡ç¨‹åœ¨æœ‰åºåŒºé—´å†…æŸ¥æ‰¾
 
             int key = array[i + 1];
             int j;
@@ -13,7 +14,7 @@ public static void insertSortV1(int[] array) {
                     break;
                 }
             }
-            //j + 1 ·ÅkeyµÄÎ»ÖÃ
+            //j + 1 æ”¾keyçš„ä½ç½®
             for (int k = i;k > j; k--) {
                 array[k + 1] = array[k];
             }
