@@ -12,7 +12,7 @@ class TreeNode {
 public class TreesWithIterate {
     private List<Integer> list;
 
-    //Ç°Ğò
+    //å‰åºéå†
     private void preOrder(TreeNode root){
         if(root == null) {
             return;
@@ -28,7 +28,7 @@ public class TreesWithIterate {
         return list;
     }
 
-    //ÖĞĞò
+    //ä¸­åºéå†
     private void inOrder(TreeNode root) {
         if(root == null){
             return;
@@ -44,7 +44,7 @@ public class TreesWithIterate {
         return list;
     }
 
-    //ºóĞò
+    //ååºéå†
     private void postOrder(TreeNode root) {
         if(root == null){
             return;
