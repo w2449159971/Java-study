@@ -6,9 +6,11 @@ import java.util.List;
 public class TreeSum {
     public static List<List<Integer>> treeSum (int[] nums) {
         //先将nums 排好序 方便后续操作
+
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
         //利用i j k 三个指引
+
         //i从第一个开始 到nums.length - 2  j 从i后一个开始 k从最后一个开始
         //如果nums[i] + nums[j] + nums[k] > 0 则 k--
         //如果nums[i] + nums[j] + nums[k] < 0 则 j++
