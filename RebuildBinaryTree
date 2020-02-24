@@ -9,17 +9,21 @@
  */
 import java.util.Arrays;
 
+//递归
 public class RebuildBinaryTree {
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+    
         if(pre.length == 0){
             return null;
         }
+        //叶子节点
         int rval = pre[0];
         if(pre.length == 1){
             return new TreeNode(rval);
         }
         TreeNode root = new TreeNode(rval);
         int rootIndex = 0;
+        //根据当前根节点，判断在中序中的位置
         //因为都不含重复数字
         for(int i = 0; i < in.length; i++){
             if(rval == in[i]){
@@ -28,6 +32,8 @@ public class RebuildBinaryTree {
             }
         }
         
+        //根据根节点，确定左右子树的区域
+        //注意！！！Arrays.copyOfRange的范围是[)这样的形式  右边是开区间
         root.left = reConstructBinaryTree(Arrays.copyOfRange(pre,1,rootIndex + 1),
                                           Arrays.copyOfRange(in,0,rootIndex));
         root.right = reConstructBinaryTree(Arrays.copyOfRange(pre,rootIndex + 1,pre.length),
