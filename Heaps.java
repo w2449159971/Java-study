@@ -2,15 +2,14 @@ import java.util.Arrays;
 
 public class Heaps {
     /**
-     * Ç°Ìá£º³ıÁËindexºÍËıµÄº¢×ÓÍâ£¬ÆäËûÎ»ÖÃÒÑÂú×ã¶ÑµÄĞÔÖÊ
+     * å‰æï¼šé™¤äº†indexå’Œå¥¹çš„å­©å­å¤–ï¼Œå…¶ä»–ä½ç½®å·²æ»¡è¶³å †çš„æ€§è´¨
      * <p>
-     * ¾­¹ıÏòÏÂµ÷Õû£¬×îÖÕ³ÉÎªÒ»¸ö¶Ñ
-     *
-     * @param array ±»¿´×÷¶ÑµÄÊı×é
-     * @param size  Êı×éÖĞ±»¿´×÷¶ÑµÄÖµµÄ¸öÊı
-     * @param index Òªµ÷ÕûÎ»ÖÃµÃÏÂ±ê
+     * ç»è¿‡å‘ä¸‹è°ƒæ•´ï¼Œæœ€ç»ˆæˆä¸ºä¸€ä¸ªå †
+     * @param array è¢«çœ‹ä½œå †çš„æ•°ç»„
+     * @param size  æ•°ç»„ä¸­è¢«çœ‹ä½œå †çš„å€¼çš„ä¸ªæ•°
+     * @param index è¦è°ƒæ•´ä½ç½®å¾—ä¸‹æ ‡
      */
- //ÏòÏÂµ÷Õû
+ //å‘ä¸‹è°ƒæ•´
     public static void heapify(int[] array, int size, int index) {
         while (true) {
             int left = 2 * index + 1;
@@ -32,14 +31,14 @@ public class Heaps {
         array[j] = t;
     }
 
-//¸ù¾İ¸ø¶¨µÄÒ»¸öÊı×é  ´´½¨´ó¶Ñ
+//æ ¹æ®ç»™å®šçš„ä¸€ä¸ªæ•°ç»„  åˆ›å»ºå¤§å †
     public static void creatHeap(int[] array, int size) {
         for (int i = (size - 2) / 2; i >= 0; i--){
             heapify(array,size,i);
         }
     }
 
-//ÏòÉÏµ÷Õû
+//å‘ä¸Šè°ƒæ•´
     public static void adjustUp(int[] array, int index) {
         while(index > 0){
             int parent = (index - 1) / 2;
