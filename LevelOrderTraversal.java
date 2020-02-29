@@ -1,11 +1,12 @@
 class LevelOrderTraversal{
-    //²ãĞò±éÀú
+    //å±‚åºéå†
     public static void levelOrderTraversal(Node root) {
         if(root == null) {
             return;
         }
-        //½«Ã¿¸ö½áµã°´ÕÕÒ»²ãÒ»²ãµÄË³ĞòÑ¹Èë¶ÓÖĞ
-        //ÒÀ´Î³ö¶Ó¾ÍµÃµ½¶ş²æÊ÷µÄ²ãĞò±éÀú½á¹û
+        //å°†æ¯ä¸ªç»“ç‚¹æŒ‰ç…§ä¸€å±‚ä¸€å±‚çš„é¡ºåºå‹å…¥é˜Ÿä¸­
+
+        //ä¾æ¬¡å‡ºé˜Ÿå°±å¾—åˆ°äºŒå‰æ ‘çš„å±‚åºéå†ç»“æœ
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
 
