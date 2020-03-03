@@ -1,0 +1,22 @@
+public class CountNumberOf2s {
+
+    //可 但时间复杂度高
+    public static int countNumberOf2s(int n) {
+        循环遍历从0-n的每个数字 判断是否个位 十位上带有数字2
+        int count = 0;
+        for(int i = 1; i <= n; i++) {
+            if(i == 2){
+                count++;
+            }
+            if(i % 10 == 2 && i!=2){
+                count++;
+            }
+            if(i / 10 == 2){
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    //可以找到规律 
+}
