@@ -1,6 +1,6 @@
 class LowestCommonAncestor{
   
-  //²éÕÒÒ»¸ö½áµãÊÇ·ñ´æÔÚÓëÒ»¿ÅÊ÷ÖĞ
+  //æŸ¥æ‰¾ä¸€ä¸ªç»“ç‚¹æ˜¯å¦å­˜åœ¨ä¸ä¸€é¢—æ ‘ä¸­
     public boolean search(Node root,Node n){
         if(root == null) {
             return false;
@@ -13,7 +13,8 @@ class LowestCommonAncestor{
         }
         return search(root.right,n);
     }
-    //²éÕÒÁ½¿ÃÊ÷µÄ¹«¹²×æÏÈ
+  
+    //æŸ¥æ‰¾ä¸¤æ£µæ ‘çš„å…¬å…±ç¥–å…ˆ
     public Node lowestCommonAncestor(Node root, Node p, Node q){
         if(root == p || root == q) {
             return root;
@@ -21,11 +22,11 @@ class LowestCommonAncestor{
 
         boolean pInLeft = search(root.left,p);
         boolean qInLeft = search(root.left,q);
-        //Èç¹ûÁ½¿ÃÊ÷½áµã¶¼ÔÚ×ó×ÓÊ÷ÖĞ£¬È¥×ó×ÓÊ÷ÖĞÕÒ¹«¹²×æÏÈ
+        //å¦‚æœä¸¤æ£µæ ‘ç»“ç‚¹éƒ½åœ¨å·¦å­æ ‘ä¸­ï¼Œå»å·¦å­æ ‘ä¸­æ‰¾å…¬å…±ç¥–å…ˆ
         if(pInLeft && qInLeft) {
             return lowestCommonAncestor(root.left,p,q);
         }
-        //Èç¹ûÁ½¿ÃÊ÷½áµã¶¼ÔÚÓÒ×ÓÊ÷ÖĞ£¬È¥ÓÒ×ÓÊ÷ÖĞÕÒ¹«¹²×æÏÈ
+        //å¦‚æœä¸¤æ£µæ ‘ç»“ç‚¹éƒ½åœ¨å³å­æ ‘ä¸­ï¼Œå»å³å­æ ‘ä¸­æ‰¾å…¬å…±ç¥–å…ˆ
         if(!pInLeft && !qInLeft) {
             return lowestCommonAncestor(root.right,p,q);
         }
