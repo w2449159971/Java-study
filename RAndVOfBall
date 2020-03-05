@@ -1,0 +1,24 @@
+import java.util.*;
+import java.lang.Math;
+
+public class RAndVOfBall{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int[] center = new int[3];
+        int[] point = new int[3];
+        double r = 0;
+        double V = 0;
+        for(int i = 0; i < 3; i++){
+            center[i] = sc.nextInt();
+        }
+        for(int i = 0; i < 3; i++){
+            point[i] = sc.nextInt();
+        }
+        r = Math.sqrt((point[0] - center[0])*(point[0] - center[0]) + (point[1] - center[1])*(point[1] - center[1])
+                     + (point[2] - center[2])*(point[2] - center[2]));
+        V = 4 * Math.acos(-1)*Math.pow(r, 3)/3;
+        System.out.printf("%.3f",r);
+        System.out.printf(" ");
+        System.out.printf("%.3f",V);
+    }
+}
