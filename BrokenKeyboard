@@ -1,0 +1,30 @@
+public class BrokenKeyboard{
+//还有点问题
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String wants = sc.nextLine();
+        String inputs = sc.nextLine();
+        List<Character> list = new ArrayList<>();
+        String want = wants.toUpperCase();
+        String input = inputs.toUpperCase();
+        int i = 0;
+        int j = 0;
+        while(i < want.length() && j < input.length()){
+            if(want.charAt(i) == input.charAt(j)){
+                i++;
+                j++;
+            }
+            else {
+                if (!list.contains(want.charAt(i))) {
+                    list.add(want.charAt(i));
+                }
+                i++;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int x = 0; x < list.size(); x++){
+            sb.append(list.get(x));
+        }
+        System.out.println(sb.toString());
+    }
+}
