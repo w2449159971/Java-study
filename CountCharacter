@@ -1,0 +1,23 @@
+public class CountCharacter {
+        public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
+                Map<Character, Integer> map = new HashMap<>();
+                while (!sc.hasNext("#")) {
+                        String s = sc.nextLine();
+
+                        for (char c : s.toCharArray()) {
+                                if (c >= 'A' && c <= 'Z') {
+                                //get不到字符？？？
+                                        map.put(c, map.getOrDefault(map.get(c), 0) + 1);
+
+                                }
+                        }
+                }
+                for (int i = 0; i <= 'Z' - 'A'; i++) {
+                        char cur = (char) ('A' + i);
+                        System.out.println(map.get(cur));
+                        System.out.printf(cur + ":" + map.getOrDefault(map.get(cur), 0));
+                        System.out.println();
+                }
+        }
+}
