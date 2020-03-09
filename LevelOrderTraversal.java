@@ -11,7 +11,6 @@ class LevelOrderTraversal{
         queue.add(root);
 
         while(!queue.isEmpty()) {
-
             Node front = queue.poll();
             if(front.left != null){
                 queue.add(front.left);
