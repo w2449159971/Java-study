@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class Replacement {
+    public String replaceSpace(String iniString, int length) {
+        // write code here
+        StringBuilder sb = new StringBuilder();
+        for(char s : iniString.toCharArray()){
+            if(s != ' '){
+                sb.append(s);
+            } else {
+                sb.append("%20");
+            }
+        }
+        return sb.toString();
+    }
+}
