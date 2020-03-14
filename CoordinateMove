@@ -1,0 +1,40 @@
+import java.util.*;
+
+//牛客网  自测可过  调试不行
+public class CoordinateMove{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String operation = sc.nextLine();
+        int x = 0;
+        int y = 0;
+        String[] operations = operation.split(";");
+        for(int i = 0; i < operations.length; i++){
+            if (operations[i].length() == 0){
+                continue;
+            }
+            char f = operations[i].charAt(0);
+            String m = operations[i].substring(1,operations[i].length());
+            if (f == 'A' || f == 'W' || f == 'S' || f == 'D') {
+                if (isDigit(m)) {
+                    int l = Integer.valueOf(m);
+                    switch (f) {
+                        case 'A': x -= l;break;
+                        case 'D': x += l;break;
+                        case 'W': y += l;break;
+                        case 'S': y -= l;break;
+                    }
+                }
+            } else {
+                continue;
+            }
+        }
+        System.out.printf(x + "," + y);
+    }
+
+    private static boolean isDigit(String m) {
+        if(m.length() <= 2 && m.length() >0){
+            return m.matches("[0-9]{1,}");
+        }
+        return false;
+    }
+}
