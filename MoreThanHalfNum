@@ -1,0 +1,36 @@
+public class MoreThanHalfNum {
+    public static int moreThanHalfNum(int[] array){
+        Arrays.sort(array);
+        int middleNum = array[array.length/2];
+        int unequalNum = 0;
+        for(int i = 0; i < array.length; i++){
+            if( array[i]!= middleNum){
+                unequalNum++;
+            }
+        }
+        if(((unequalNum >= array.length/2)&&(array.length%2 == 0))||((unequalNum > array.length/2)&&(array.length%2 != 0)) ){
+            return 0;
+        }
+        return array[array.length/2];
+    }
+
+        public static int MoreThanHalfNum_Solution(int [] array) {
+            Map<Integer,Integer> map = new HashMap<>();
+            for(int i = 0; i < array.length; i++){
+                map.put(array[i],map.getOrDefault(array[i],0) + 1);
+            }
+            int half = array.length / 2;
+            for(int val : map.values()){
+                if(val >= half){
+                //涉及如何根据value获得key
+                    return map.get;
+                }
+            }
+            return 0;
+        }
+
+    public static void main(String[] args) {
+        int[] array = {1,2,3,2,2,2,5,4,2};
+        System.out.println(MoreThanHalfNum_Solution(array));
+    }
+}
