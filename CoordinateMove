@@ -1,6 +1,7 @@
 import java.util.*;
 
 //牛客网  自测可过  调试不行
+
 public class CoordinateMove{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
