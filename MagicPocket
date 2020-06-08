@@ -1,0 +1,24 @@
+import java.util.Scanner;
+ 
+ //动态规划 背包问题
+public class MagicPocket{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int n = scanner.nextInt();
+            int[] num = new int[n];
+            for (int i = 0; i < n; i++){
+                num[i] = scanner.nextInt();
+            }
+            int[] dp = new int[41];   //dp[i] 表示总重量为 i 取法的数量
+            dp[0] = 1;  //一个也不取
+            for (int i = 0; i < n; i++) {  //遍历每一件物品
+                for (int j = 40; j >= num[i]; j--) {  //
+                    dp[j] += dp[j - num[i]];
+                }
+            }
+            System.out.println(dp[40]);
+        }
+        scanner.close();
+    }
+}
