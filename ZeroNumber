@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class ZeroNumber{
+//可行但是还需要系统循环去判断效率相对比较低
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        //求n的结成结尾有几个0  
+        //可以找到规律来做 
+        //首先 5 * 2 = 10 5乘以任何双数 会末尾出现1个0
+        //但是25 = 5 * 5 所以 会提供2个0
+        //同理1000 以内 125 提供3个0  625 4个0
+        //所以 只需计算1 - N 出现几个十位整数 和几个5 他们之和就是末尾0的个数
+        int count = 0;
+        for(int i = 1; i <= n; i++){
+            if(i % 625 == 0){
+                count += 4;
+            } else if(i % 125 == 0){
+                count += 3;
+            }else if(i % 25 == 0){
+                count += 2;
+            }else if(i % 5 == 0){
+                count ++;
+            }
+        }
+        System.out.println(count);
+    }
+    
+    //递归判断有多少个5的倍数
+    public static int getZero(int num){
+        return num==0?0:num/5+getZero(num/5);
+    }
+ 
+    public static void main2(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        System.out.println(getZero(num));
+    }
+}
