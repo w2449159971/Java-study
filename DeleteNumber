@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class DeleteNumber{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if(n > 1000) { n = 999;}
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            list.add(i);
+        }
+        int j = 0;
+        while(list.size() > 1){
+            j = (j + 2) % list.size();
+            list.remove(j);
+        }
+        System.out.println(list.get(0));
+    }
+}
