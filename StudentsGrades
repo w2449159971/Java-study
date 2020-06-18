@@ -26,7 +26,6 @@ public class StudentsGrades {
             }
             result.add(number);
         }
-        System.out.println(" ");
         for (int i = 0; i < result.size(); i ++){
             System.out.println(result.indexOf(i));
         }
