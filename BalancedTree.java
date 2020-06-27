@@ -9,8 +9,9 @@ class BalancedTree{
         }
         int left = height(root.left);
         int right = height(root.right);
-        int height = Math.max(left,right);
-        return height + 1;
+//         int height = Math.max(left,right);
+//         return height + 1;
+       return left>right?left+1:right+1;
     }
 
     public boolean isBalanced(Node root) {
