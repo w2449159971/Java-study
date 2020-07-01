@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Sum{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            printSum(n);
+        }
+    }
+    
+    public static void printSum(int n){
+        int nn = n * n;
+        int sum1 = 0;
+        int sum2 = 0;
+        while(n != 0){
+            sum1 += n%10;
+            n = n/10;
+        }
+        
+        while(nn != 0){
+            sum2 += nn %10;
+            nn = nn / 10;
+        }
+        System.out.print(sum1 + " " + sum2);
+    }
+}
