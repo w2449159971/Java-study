@@ -1,7 +1,6 @@
 import java.util.Random;
 
 public class ExceptionDemo {
-    
     static Random random = new Random();
     public static void a() {
         if (random.nextInt(5) == 0) {
