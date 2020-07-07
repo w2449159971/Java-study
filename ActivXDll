@@ -23,7 +23,7 @@ public class ActivXDll{
             res.append(resolveQian(yi)).append("亿");
             number = number-yi*100000000;
         }
-         
+        
         int wan = (int)(number/10000);
         if(wan!=0){
             res.append(resolveQian(wan)).append("万");
@@ -66,8 +66,7 @@ public class ActivXDll{
         if(qian!=0){
             resBuffer.append(map[qian-1]).append("仟");
             temp = temp-qian*1000;
-        }
-         
+        }    
         //百位
         int bai = (int)(temp/100);
         if(bai!=0){
