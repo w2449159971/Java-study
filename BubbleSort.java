@@ -1,4 +1,5 @@
 class BubbleSort{
+    //冒泡排序改进： 增加一个标志位判断本轮比较是否进行了交换
     public static void bubbleSort(int[] array) {
         for (int i = 0; i < array.length - 1; i ++) {
             //范围[0, array.length - i]
@@ -9,7 +10,7 @@ class BubbleSort{
                     sorted = false;
                 }
             }
-            //已经有序 即没有进行交换 可直接跳出
+            //某一轮比较没有进行交换 即已经有序 可直接跳出
             if (sorted) {
                 break ;
             }
@@ -30,11 +31,17 @@ class BubbleSort{
             {
                 if(array[j]>array[j+1])
                 {
-                    int temp=array[j];
-                    array[j]=array[j+1];
-                    array[j+1]=temp;
+                    swap(array, j, j + 1);
                 }
             }
+        }
+    }
+    
+    public static void main(String[] args){
+        int[] array = {12, 3,2,7,4,1,8,6,9};
+        bubbleSort(array);
+        for (int i = 0; i < array.length; i++){
+            System.out.println(array[i]);
         }
     }
 }
